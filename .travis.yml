@@ -12,9 +12,9 @@ script:
 
 after_script:
   - cd ./public
-  # - git init
-  # - git config user.name "yourname"  #修改name
-  # - git config user.email "your email"  #修改email
+  - git init
+  - git config user.name "wangxiang"  #修改name
+  - git config user.email "wangxiang@yixia.com"  #修改email
   - git add .
   - git commit -m "update"
   - git push --force --quiet "https://${f629858390741037d1ef306dd32b8d8129301d55}@${github.com/shinewang1991/shinewang1991.github.io.git}" master:master  #GH_TOKEN是在Travis中配置token的名称
