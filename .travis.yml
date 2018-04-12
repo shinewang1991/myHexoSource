@@ -8,7 +8,7 @@ install:
 script:
   - hexo cl  #清除
   - hexo g  #生成
-  - hexo d  #发布
+  # - hexo d  #发布    自己在这里坑了很久，因为用了下面的after_script会自动push静态资源文件到仓库里，就是就是代替了hexo d命令。 
 
 after_script:
   - cd ./public
