@@ -1,27 +1,34 @@
-language: node_js  #设置语言
-
-node_js: stable  #设置相应的版本
-
+language: node_js
+node_js: stable
 install:
-  - npm install  #安装hexo及插件
-
+- npm install
 script:
-  - hexo cl  #清除
-  - hexo g  #生成
-  # - hexo d  #发布    自己在这里坑了很久，因为用了下面的after_script会自动push静态资源文件到仓库里，就是就是代替了hexo d命令。 
-
+- hexo cl
+- hexo g
 after_script:
-  - cd ./public
-  - git init
-  - git config user.name "wangxiang"  #修改name
-  - git config user.email "wangxiang@yixia.com"  #修改email
-  - git add .
-  - git commit -m "update"
-  - git push --force --quiet "https://${f629858390741037d1ef306dd32b8d8129301d55}@${github.com/shinewang1991/shinewang1991.github.io.git}" master:master  #GH_TOKEN是在Travis中配置token的名称
-
+- cd ./public
+- git init
+- git config user.name "wangxiang"
+- git config user.email "wangxiang@yixia.com"
+- git add .
+- git commit -m "update"
+- git push --force --quiet "https://${f629858390741037d1ef306dd32b8d8129301d55}@${github.com/shinewang1991/shinewang1991.github.io.git}"
+  master:master
 branches:
   only:
-    - master  #只监测master分支，master是我的分支的名称，可根据自己情况设置
+  - master
 env:
- global:
-   - GH_REF: github.com/shinewang1991/shinewang1991.github.io.git  #设置GH_REF，注意更改yourname
+  global:
+  - GH_REF: github.com/shinewang1991/shinewang1991.github.io.git
+before_install:
+
+  # 解密私钥
+- openssl aes-256-cbc -K $encrypted_d5ccff8f34ef_key -iv $encrypted_d5ccff8f34ef_iv
+  -in vps_rsa.enc -out vps_rsa -d
+- chmod 600 ~/.ssh/id_rsa
+- eval $(ssh-agent)
+- ssh-add ~/.ssh/id_rsa
+- cp ssh_config ~/.ssh/config
+- git config --global user.name "wangxiang"
+- git config --global user.email wangxiang@yixia.com
+
