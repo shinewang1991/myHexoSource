@@ -36,7 +36,7 @@ twitter_username:   shinewang753
 # linkedin_username:  
 
 # Build settings
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+anchorjs: false                          # if you want to customize anchor. check out line:181 of `post.html`
 
 
 # Disqus settings
@@ -45,7 +45,7 @@ disqus_username: shinewang
 # Duoshuo settings
 # duoshuo_username: kaijun
 # Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+# duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
 
 # Analytics settings
