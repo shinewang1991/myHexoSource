@@ -46,7 +46,7 @@ categories:
 修改Xcode Header Search Paths，链接到FFmpeg头文件的所在目录，简单的方式就是直接从左侧把include目录拽进框里就行了。
 ![](HeaderSearchPaths.png)
 
-添加系统依赖库:`CoreMedia.framework` `VideoToolBox.framework` `AudioToolBox.framework` `libiconv.2.4.0.tbd` `libbz2.1.0.tbd` `libbz2.tbd`
+添加系统依赖库:`CoreMedia.framework` `VideoToolBox.framework` `AudioToolBox.framework` `AVFoundation.framework` `libz.tbd` `libiconv.tbd` `libbz2.tbd` `libbz2.1.0.tbd` `libiconv.2.4.0.tbd`
 ![](依赖库.png)
 
 修改项目中的一个.m文件为mm后缀, 因为需要编译C++文件，所以需要这一步. 我将ViewController.m 改为 ViewController.mm
