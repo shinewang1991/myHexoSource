@@ -1,7 +1,7 @@
 ---
 title: {{ title }}
 date: {{ date }}
-header-img: "post-bg.jpg"
+header-img: "post_header.jpg"
 tags:
     - 
 categories:
