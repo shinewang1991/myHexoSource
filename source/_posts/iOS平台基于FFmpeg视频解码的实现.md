@@ -88,12 +88,12 @@ av_register_all();
 ```
 int operationResult = 0;  //标识操作结果的状态码
 AVFormatContext *avformat_context = avformat_alloc_context();
-    const char *url = [inPath UTF8String];
-    operationResult = avformat_open_input(&avformat_context, url, NULL, NULL);   //avformatcontext传的是二级指针（可以复习下二级指针的知识)
-    if(operationResult != 0){
-        //        av_log(NULL, 1, "打开文件失败");
-        NSLog(@"打开文件失败");
-        return;
+const char *url = [inPath UTF8String];
+operationResult = avformat_open_input(&avformat_context, url, NULL, NULL);   //avformatcontext传的是二级指针（可以复习下二级指针的知识)
+if(operationResult != 0){
+    //        av_log(NULL, 1, "打开文件失败");
+    NSLog(@"打开文件失败");
+    return;
     }
 ```
 
@@ -118,8 +118,8 @@ int videoStremIndex = -1;
             break;
         }
     }
-        AVCodecContext *avcodec_context = avformat_context -> streams[videoStremIndex] -> codec;    //根据视频流的index拿到解码器上下文
-    AVCodec *decodeCodec = avcodec_find_decoder(avcodec_context -> codec_id);   //根据解码器上下文拿到解码器id ,然后得到解码器
+AVCodecContext *avcodec_context = avformat_context -> streams[videoStremIndex] -> codec;    //根据视频流的index拿到解码器上下文
+AVCodec *decodeCodec = avcodec_find_decoder(avcodec_context -> codec_id);   //根据解码器上下文拿到解码器id ,然后得到解码器
 NSLog(@"解码器为%s",decodeCodec -> name);
 ```
 
@@ -127,11 +127,11 @@ NSLog(@"解码器为%s",decodeCodec -> name);
 
 ```
 operationResult = avcodec_open2(avcodec_context,decodeCodec, NULL);
-    if(operationResult != 0){
-        //        av_log(NULL, 1, "打开解码器失败");
-        NSLog(@"打开解码器失败");
-        return;
-    }
+if(operationResult != 0){
+    //        av_log(NULL, 1, "打开解码器失败");
+    NSLog(@"打开解码器失败");
+    return;
+}
 ```
 第六步:开始解码
 
@@ -144,8 +144,7 @@ operationResult = avcodec_open2(avcodec_context,decodeCodec, NULL);
             operationResult = avcodec_receive_frame(avcodec_context, avframe_in);
             if(operationResult == 0){   //解码成功
             
-                //其实这里我们就已经解码成功了
-                //进行类型转换:将解码出来的原像素数据转成我们需要的yuv420格式                
+                //其实这里我们就已经解码成功了              
                 decodeIndex++;
                 //                av_log(NULL, 1, "解码到第%ld帧了",decodeIndex);
                 NSLog(@"解码到第%ld帧了",decodeIndex);
