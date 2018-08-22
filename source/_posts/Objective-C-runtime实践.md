@@ -29,23 +29,26 @@ method swizzing即为方法交换，由于OC的运行时特性，程序在运行
 OC中一个Class的category是可以给这个Class扩展方法的，由上文中我们又知道了Class的load函数在main函数之前就会被执行。所以我们要做的就是在load函数中去做method swizzing.
 
 以一个Person类为例，Person有个eat成员方法:
-`
+
+```
 @implementation Person
 - (void)eat{
     NSLog(@"%s",__func__);
 }
-`
+```
 
 新增一个Person的category, category中有个testEat方法:
-`
+
+```
 @implementation Person (test)
 - (void)testEat{
     NSLog(@"%s",__func__);
 }
-`
+```
 
 现在要做的就是在person实例对象在调用eat函数时，我需要打印出的是testEat函数，也就是执行testEat方法。这就是method swizzing(方法替换). 直接上代码:
-     
+
+```
     #import "Person+test.h"
     #import <objc/runtime.h>
 
@@ -83,8 +86,11 @@ OC中一个Class的category是可以给这个Class扩展方法的，由上文中
     }
     @end
     
+```
+    
 我们在main函数中初始化一个person. 执行person的eat方法:
-`
+
+```
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         NSLog(@"Hello, World!");
@@ -93,8 +99,8 @@ int main(int argc, const char * argv[]) {
     }
     return 0;
 }
-`
-这里会先打印出test函数，再打印出testEat函数. 实现了方法替换. 实际用例一般用在ViewController统计打点上， 对ViewWillAppear做方法替换，先执行原来的viewWillAppear逻辑，再执行我们要做的打点逻辑.
+```
+这里会先打印出test函数，再打印出testEat函数. 实现了方法替换. 实际用例一般用在ViewController统计打点上， 对ViewWillAppear做方法替换，先执行原来的viewWillAppear逻辑，再执行我们要做的打点逻辑. [完整代码](https://github.com/shinewang1991/SHPractice-Runtime)
 
 
 
